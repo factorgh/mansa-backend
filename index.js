@@ -74,6 +74,9 @@ app.use(
 );
 
 ///applicaton route
+app.use("/health", (req, res) => {
+  res.send("ok");
+});
 app.use("/api/v1/users", userRoutes);
 app.use("/api/v1/patients", patientRoutes);
 app.use("/api/v1/tests", testRoutes);
