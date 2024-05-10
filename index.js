@@ -34,11 +34,7 @@ mongoose
 ///Create express instance
 const app = express();
 
-app.use(
-  cors({
-    origin: process.env.FRONTEND,
-  })
-);
+app.use(cors());
 
 ///HHTP HAEDER SECUIRTY
 app.use(helmet());
