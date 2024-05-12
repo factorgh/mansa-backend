@@ -6,7 +6,6 @@ import dotenv from "dotenv";
 import userRoutes from "./routes/user.route.js";
 import patientRoutes from "./routes/patient.route.js";
 import testRoutes from "./routes/labTest.route.js";
-import rateLimiter from "express-rate-limit";
 import helmet from "helmet";
 import xss from "xss-clean";
 import mongoSanitize from "express-mongo-sanitize";
@@ -54,13 +53,6 @@ app.use(bodyParser.json());
 
 //handling statics files
 app.use(express.static("public"));
-
-const limiter = rateLimiter({
-  max: 100,
-  windowMs: 60 * 60 * 1000,
-  message: "Too many request from this IP address.Please try again in an hour",
-});
-app.use("/api", limiter);
 
 ///Prevent parameter pollution ,Yet to implement
 app.use(
