@@ -1,5 +1,4 @@
 import Patient from "../models/patient.model.js";
-import User from "../models/user.model.js";
 
 const getAllPatients = async (req, res) => {
   const patient = await Patient.find();
@@ -55,7 +54,7 @@ const updatePatient = async (req, res) => {
   }
 };
 
-const deletePatient = async () => {
+const deletePatient = async (req, res) => {
   try {
     await Patient.findByIdAndDelete({ _id: req.params.id });
     res.status(200).send("Patient deleted successfully");
