@@ -64,10 +64,28 @@ const deletePatient = async () => {
   }
 };
 
+const updatePatientStatus = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { status } = req.body;
+
+    const updatedPatient = await Patient.findByIdAndUpdate(
+      id,
+      { status },
+      { new: true }
+    );
+
+    res.json(updatedPatient);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
 export default {
   getAllPatients,
   createPatient,
   updatePatient,
   deletePatient,
   getPatient,
+  updatePatientStatus,
 };

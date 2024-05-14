@@ -2,8 +2,7 @@ import LabTest from "../models/labTest.js";
 
 const conductLabTest = async (req, res) => {
   try {
-    const labTest = new LabTest(req.body);
-    await labTest.save();
+    const labTest = LabTest.create(req.body);
     res.status(200).json({
       status: "success",
       data: { labTest },
@@ -25,8 +24,7 @@ const getLabTest = async (req, res) => {
 };
 const getOneTest = async (req, res) => {
   try {
-    const { id } = req.params;
-    const results = await LabTest.findById(id);
+    const results = await LabTest.findById(req.params.id);
 
     if (!results) return res.status(404).send("Cannot load lab test");
     res.status(200).send(results);
@@ -47,10 +45,28 @@ const editLabTest = async (req, res) => {
   res.status(200).send(patient);
 };
 
+const updateLabStatus = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { status } = req.body;
+
+    const updatedLab = await LabTest.findByIdAndUpdate(
+      id,
+      { status },
+      { new: true }
+    );
+
+    res.json(updatedLab);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+};
+
 export default {
   conductLabTest,
   getLabTest,
   delLabTest,
   editLabTest,
   getOneTest,
+  updateLabStatus,
 };

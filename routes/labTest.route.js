@@ -12,6 +12,7 @@ router
   .route("/:id")
   .get(labTestController.getOneTest)
   .patch(labTestController.editLabTest)
-  .delete(labTestController.delLabTest);
+  .delete(labTestController.delLabTest)
+  .put();
 
 export default router;
