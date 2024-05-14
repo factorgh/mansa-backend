@@ -34,13 +34,18 @@ const getOneTest = async (req, res) => {
 };
 const delLabTest = async (req, res) => {
   await LabTest.findByIdAndDelete({ _id: req.params.id });
-  res.status(400).send("success");
+  res.status(200).send("success");
 };
 
 const editLabTest = async (req, res) => {
-  const patient = await LabTest.findByIdAndUpdate(req.params.id, req.body, {
-    new: true,
-  });
+  console.log("<-----------test route--------->", req.body);
+  const patient = await LabTest.findByIdAndUpdate(
+    { _id: req.params.id },
+    req.body,
+    {
+      new: true,
+    }
+  );
   if (!patient) return res.status(400).send("Cannot get patient test");
   res.status(200).send(patient);
 };

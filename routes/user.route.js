@@ -18,6 +18,6 @@ router
   .route("/:id")
   .get(userController.getUser)
   .delete(userController.deleteUser)
-  .patch(userController.updateUser);
+  .put(userController.updateUser);
 
 export default router;

@@ -40,11 +40,12 @@ const updatePatient = async (req, res) => {
   try {
     const { id } = req.params;
 
-    const updatedPatient = await User.findByIdAndUpdate(id, req.body, {
+    const updatedPatient = await Patient.findByIdAndUpdate(id, req.body, {
       new: true,
     });
-    if (!updatedPatient) return res.status(400).send("User cannot be updated");
-    res.status(200).send(updatePatient);
+    if (!updatedPatient)
+      return res.status(400).send("Patient cannot be updated");
+    res.status(200).send(updatedPatient);
   } catch (e) {
     console.log(e.message);
     res.status(400).json({
@@ -56,8 +57,7 @@ const updatePatient = async (req, res) => {
 
 const deletePatient = async () => {
   try {
-    const { id } = req.params;
-    await Patient.findByIdAndDelete({ _id: id });
+    await Patient.findByIdAndDelete({ _id: req.params.id });
     res.status(200).send("Patient deleted successfully");
   } catch (e) {
     console.log(e.message);
