@@ -1,5 +1,12 @@
 import Patient from "../models/patient.model.js";
 
+const calculateWaitTime = async () => {
+  const patients = await Patient.find();
+  const numPatients = patients.length;
+  const waitTime = numPatients * 40 * 60;
+  return waitTime;
+};
+
 const getAllPatients = async (req, res) => {
   const patient = await Patient.find();
 
@@ -19,8 +26,12 @@ const getPatient = async (req, res) => {
 
 const createPatient = async (req, res) => {
   try {
-    ///Get user data from req
     const patient = await Patient.create(req.body);
+    ///Get user data from req
+    // const patient = new Patient(req.body);
+    //Calculate the waitPeriod before saving data to the db
+    // patient.waitPeriod = await calculateWaitTime();
+    // await patient.save();
 
     res.status(200).json({
       status: "success",
@@ -56,7 +67,7 @@ const updatePatient = async (req, res) => {
 
 const deletePatient = async (req, res) => {
   try {
-    await Patient.findByIdAndDelete({ _id: req.params.id });
+    await Patient.findByIdAndDelete(req.params.id);
     res.status(200).send("Patient deleted successfully");
   } catch (e) {
     console.log(e.message);
@@ -80,6 +91,18 @@ const updatePatientStatus = async (req, res) => {
   }
 };
 
+///Download lab results
+const downloadReport = async (req, res) => {
+  try {
+    const results = await Patient.find().select("-__v -_id");
+
+    if (!results) return res.status(404).send("Cannot load patients report");
+    res.status(200).send(results);
+  } catch (e) {
+    res.status(400).send(e.message);
+  }
+};
+
 export default {
   getAllPatients,
   createPatient,
@@ -87,4 +110,5 @@ export default {
   deletePatient,
   getPatient,
   updatePatientStatus,
+  downloadReport,
 };

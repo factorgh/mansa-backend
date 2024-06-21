@@ -9,7 +9,7 @@ const labTestSchema = new mongoose.Schema({
   },
   status: {
     type: String,
-    enum: ["pending", "completed", "isActive"],
+    enum: ["pending", "completed"],
     default: "pending",
   },
   arrivalTime: { type: Date, default: Date.now },

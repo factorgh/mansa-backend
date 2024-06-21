@@ -78,7 +78,7 @@ setInterval(async () => {
     patient.waitPeriod = waitPeriod;
     await patient.save();
   });
-}, 60000); // Update every minute
+}, 1000); // Update every minute
 
 setInterval(async () => {
   const patients = await LabTest.find();
@@ -90,7 +90,7 @@ setInterval(async () => {
     patient.waitPeriod = waitPeriod;
     await patient.save();
   });
-}, 60000); // Update every minute
+}, 1000); // Update every minute
 
 //Create port
 const port = process.env.PORT || 5000;

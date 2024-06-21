@@ -8,6 +8,10 @@ router
   .get(labTestController.getLabTest)
   .post(labTestController.conductLabTest);
 
+router.put("/status/:id", labTestController.updateLabStatus);
+
+router.get("/download", labTestController.downloadReport);
+
 router
   .route("/:id")
   .get(labTestController.getOneTest)

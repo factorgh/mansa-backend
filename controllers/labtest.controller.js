@@ -67,6 +67,17 @@ const updateLabStatus = async (req, res) => {
   }
 };
 
+const downloadReport = async (req, res) => {
+  try {
+    const results = await LabTest.find().select("-__v -_id");
+
+    if (!results) return res.status(404).send("Cannot load lab tests");
+    res.status(200).send(results);
+  } catch (e) {
+    res.status(400).send(e.message);
+  }
+};
+
 export default {
   conductLabTest,
   getLabTest,
@@ -74,4 +85,5 @@ export default {
   editLabTest,
   getOneTest,
   updateLabStatus,
+  downloadReport,
 };
