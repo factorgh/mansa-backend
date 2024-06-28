@@ -14,6 +14,7 @@ import mongoose from "mongoose";
 import cookieParser from "cookie-parser";
 import Patient from "./models/patient.model.js";
 import LabTest from "./models/labTest.js";
+import hospitalTest from "./routes/test.route.js";
 
 ///Handle uncaught exceptions
 process.on("uncaughtException", (err) => {
@@ -68,6 +69,7 @@ app.use("/health", (req, res) => {
 app.use("/api/v1/users", userRoutes);
 app.use("/api/v1/patients", patientRoutes);
 app.use("/api/v1/tests", testRoutes);
+app.use("/api/v1/hospital-test", hospitalTest);
 
 setInterval(async () => {
   const patients = await Patient.find();
