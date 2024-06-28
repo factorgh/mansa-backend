@@ -1,4 +1,4 @@
-import Test from "../models/Test.js";
+import Test from "../models/test.js";
 
 const createHospitalTest = async (req, res) => {
   try {
