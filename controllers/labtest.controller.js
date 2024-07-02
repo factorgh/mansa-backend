@@ -1,4 +1,5 @@
 import LabTest from "../models/labTest.js";
+import Patient from "../models/patient.model.js";
 
 const conductLabTest = async (req, res) => {
   try {
@@ -8,7 +9,7 @@ const conductLabTest = async (req, res) => {
       data: { labTest },
     });
   } catch (error) {
-    res.status(400).send("Error conductin lab test");
+    res.status(400).send("Error conducting lab test");
   }
 };
 
@@ -78,6 +79,17 @@ const downloadReport = async (req, res) => {
   }
 };
 
+const getPatientByFileNumber = async (req, res) => {
+  const { fileNumber } = req.body;
+
+  const patient = await Patient.findOne({ fileNumber });
+  if (!patient) {
+    return res.status(400).send({ message: "Patient not found" });
+  }
+
+  res.status(200).send(patient);
+};
+
 export default {
   conductLabTest,
   getLabTest,
@@ -86,4 +98,5 @@ export default {
   getOneTest,
   updateLabStatus,
   downloadReport,
+  getPatientByFileNumber,
 };

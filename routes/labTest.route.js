@@ -11,6 +11,7 @@ router
 router.put("/status/:id", labTestController.updateLabStatus);
 
 router.get("/download", labTestController.downloadReport);
+router.get("/file/:fileNumber", labTestController.getPatientByFileNumber);
 
 router
   .route("/:id")
