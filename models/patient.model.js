@@ -13,7 +13,13 @@ const patientSchema = new mongoose.Schema({
   fileNumber: Number,
   purpose: {
     type: String,
-    enum: ["consulting", "wound-dressing", "community", "antenatal"],
+    enum: [
+      "consulting",
+      "wound-dressing",
+      "community",
+      "antenatal",
+      "speciality-care",
+    ],
   },
   status: {
     type: String,
