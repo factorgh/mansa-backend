@@ -7,7 +7,7 @@ router
   .route("/")
   .get(patientController.getAllPatients)
   .post(patientController.createPatient);
-
+router.get("/file/:fileNumber", patientController.getPatientByFile);
 router.get("/download", patientController.downloadReport);
 router
   .route("/:id")

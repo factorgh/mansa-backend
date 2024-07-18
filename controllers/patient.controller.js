@@ -103,6 +103,20 @@ const downloadReport = async (req, res) => {
   }
 };
 
+const getPatientByFile = async (req, res) => {
+  // Get file from req.params
+  const { fileNumber } = req.params;
+
+  // Get patient from db by file number
+  const patient = await Patient.findOne({ fileNumber: fileNumber });
+  console.log(patient);
+  // Defense mechanism
+  if (!patient) return res.status(404).send("No patient with file number");
+
+  // send patient data as response
+  res.status(200).send(patient);
+};
+
 export default {
   getAllPatients,
   createPatient,
@@ -111,4 +125,5 @@ export default {
   getPatient,
   updatePatientStatus,
   downloadReport,
+  getPatientByFile,
 };
