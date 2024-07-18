@@ -33,7 +33,6 @@ mongoose
 
 ///Create express instance
 const app = express();
-
 app.use(cors());
 
 ///HHTP HAEDER SECUIRTY
@@ -96,6 +95,14 @@ setInterval(async () => {
 
 //Create port
 const port = process.env.PORT || 5000;
+
+// io.on("connection", (socket) => {
+//   console.log("A client connected");
+
+//   socket.on("disconnect", () => {
+//     console.log("A client disconnected");
+//   });
+// });
 
 const server = app.listen(port, () => console.log(`SERVER STARTED ON ${port}`));
 
